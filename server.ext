@@ -1,0 +1,6 @@
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = required
+DNS.2 = required
+IP.1  = optional
