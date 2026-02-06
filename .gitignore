@@ -6,3 +6,6 @@
 *.txt
 *.old
 *.attr
+*.p12
+*.jks
+*.pki
