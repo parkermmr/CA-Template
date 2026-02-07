@@ -8,7 +8,7 @@ VERSION="1.0.0"
 # Paths
 CA_DIR=~/CA
 DEFAULT_OUTPUT_DIR=~/.secrets
-CONFIG_FILE="${CA_DIR}/.generate-cert.conf"
+CONFIG_FILE="${CA_DIR}/.generate-certs.conf"
 
 # Default certificate subject values (can be overridden in config file)
 DEFAULT_COUNTRY="${CERT_COUNTRY:-AU}"
@@ -586,7 +586,7 @@ EOF
     echo "  root-ca.cert              - CA public certificate (share this)"
     echo "  private/root-ca.key       - CA private key (KEEP SECURE!)"
     echo "  openssl-ca.cnf            - CA configuration"
-    echo "  .generate-cert.conf       - Default certificate values"
+    echo "  .generate-certs.conf       - Default certificate values"
     echo "  index.txt                 - Certificate database"
     echo "  serial.txt                - Certificate serial counter"
     echo ""
@@ -600,7 +600,7 @@ EOF
     echo ""
     echo "Next steps:"
     echo "1. Backup private/root-ca.key to a secure location"
-    echo "2. Edit .generate-cert.conf to customize default values"
+    echo "2. Edit .generate-certs.conf to customize default values"
     echo "3. Distribute root-ca.cert to systems that need to trust this CA"
     echo "4. Generate certificates using: $(basename $0) -s SERVICE_NAME"
     echo ""
