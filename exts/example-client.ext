@@ -1,0 +1,18 @@
+# Client Certificate Extension File (Optional)
+# Rename this to .ext (remove .example) if you want custom SANs
+
+basicConstraints                   = CA:FALSE
+nsCertType                         = client, email
+nsComment                          = "OpenSSL Generated Client Certificate"
+subjectKeyIdentifier               = hash
+authorityKeyIdentifier             = keyid,issuer:always
+keyUsage                           = critical, nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage                   = clientAuth, emailProtection
+subjectAltName                     = @alt_names
+
+[alt_names]
+# Optional: Add email addresses
+email.1 = user@example.com
+
+# Optional: Add DNS names
+# DNS.1 = client.example.com

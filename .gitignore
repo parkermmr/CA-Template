@@ -1,11 +1,14 @@
+# Ignore all certificate based generation files.
 *.key
 *.pem
 *.cert
 *.crt
 *.csr
-*.txt
-*.old
-*.attr
 *.p12
 *.jks
 *.pki
+
+# Ignore all database files
+*.txt
+*.old
+*.attr

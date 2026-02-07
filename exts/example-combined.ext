@@ -1,0 +1,25 @@
+# Combined Certificate Extension File
+# Edit this file to customize your client+server certificate
+
+basicConstraints                   = CA:FALSE
+nsCertType                         = client, server, email
+nsComment                          = "OpenSSL Generated Client+Server Certificate"
+subjectKeyIdentifier               = hash
+authorityKeyIdentifier             = keyid,issuer:always
+keyUsage                           = critical, digitalSignature, keyEncipherment, nonRepudiation
+extendedKeyUsage                   = serverAuth, clientAuth, emailProtection
+subjectAltName                     = @alt_names
+
+[alt_names]
+# REQUIRED: Minimum 2 DNS names for combined certificates
+DNS.1 = service.internal.local
+DNS.2 = service.example.com
+
+# Optional: Add more DNS names
+# DNS.3 = service.example.org
+
+# Optional: Add IP addresses
+# IP.1  = 192.168.1.100
+
+# Optional: Add email addresses
+# email.1 = service@example.com

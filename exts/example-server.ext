@@ -1,0 +1,23 @@
+# Server Certificate Extension File
+# Edit this file to customize your server certificate
+
+basicConstraints                   = CA:FALSE
+nsCertType                         = server
+nsComment                          = "OpenSSL Generated Server Certificate"
+subjectKeyIdentifier               = hash
+authorityKeyIdentifier             = keyid,issuer:always
+keyUsage                           = critical, digitalSignature, keyEncipherment
+extendedKeyUsage                   = serverAuth
+subjectAltName                     = @alt_names
+
+[alt_names]
+# REQUIRED: Minimum 2 DNS names for server certificates
+DNS.1 = server.internal.local
+DNS.2 = server.example.com
+
+# Optional: Add more DNS names
+# DNS.3 = server.example.org
+
+# Optional: Add IP addresses
+# IP.1  = 192.168.1.100
+# IP.2  = 10.0.0.50

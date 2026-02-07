@@ -2,37 +2,45 @@ HOME                               = .
 RANDFILE                           = $ENV::HOME/.rnd
 
 ####################################################################
+
 [ ca ]
-default_ca                         = CA_default                # The default ca section
+default_ca                         = CA_default
 
 [ CA_default ]
 
-base_dir                           = .
-certificate                        = $base_dir/root-ca.cert    # The CA certificate
-private_key                        = $base_dir/root-ca.key     # The CA private key
-new_certs_dir                      = $base_dir                 # Location for new certs after signing
-database                           = $base_dir/index.txt       # Database index file
-serial                             = $base_dir/serial.txt      # The current serial number
+dir                                = .
+certs                              = $dir/certs              # Where issued certs are kept
+crl_dir                            = $dir/crl                # Where CRLs are kept
+database                           = $dir/index.txt          # Database index file
+new_certs_dir                      = $dir/certs              # Default place for new certs
+certificate                        = $dir/root-ca.cert       # The CA certificate
+serial                             = $dir/serial.txt         # The current serial number
+crlnumber                          = $dir/crlnumber.txt      # The current CRL number
+crl                                = $crl_dir/crl.pem        # The current CRL
+private_key                        = $dir/private/root-ca.key # The CA private key
+RANDFILE                           = $dir/private/.rand      # Private random number file
 
-default_days                       = 1000                      # How long to certify for
-default_crl_days                   = 30                        # How long before next CRL
-default_md                         = sha256                    # Use public key default MD
-preserve                           = no                        # Keep passed DN ordering
+default_days                       = 1000                    # How long to certify for
+default_crl_days                   = 30                      # How long before next CRL
+default_md                         = sha256                  # Use public key default MD
+preserve                           = no                      # Keep passed DN ordering
 
-x509_extensions                    = ca_extensions             # The extensions to add to the cert
+x509_extensions                    = ca_extensions           # The extensions to add to the cert
 
-email_in_dn                        = no                        # Don't concat the email in the DN
-copy_extensions                    = copy                      # Required to copy SANs from CSR to cert
+email_in_dn                        = no                      # Don't concat the email in the DN
+copy_extensions                    = copy                    # Required to copy SANs from CSR to cert
 
 ####################################################################
+
 [ req ]
 default_bits                       = 4096
-default_keyfile                    = ca.key
+default_keyfile                    = private/root-ca.key
 distinguished_name                 = ca_distinguished_name
 x509_extensions                    = ca_extensions
 string_mask                        = utf8only
 
 ####################################################################
+
 [ ca_distinguished_name ]
 countryName                        = Country Name (2 letter code)
 countryName_default                = AU
@@ -57,6 +65,7 @@ commonName                         = Common Name (e.g. server FQDN or YOUR name)
 emailAddress                       = Email Address
 
 ####################################################################
+
 [ ca_extensions ]
 
 subjectKeyIdentifier               = hash
@@ -65,6 +74,7 @@ basicConstraints                   = critical, CA:true
 keyUsage                           = keyCertSign, cRLSign
 
 ####################################################################
+
 [ signing_policy ]
 countryName                        = supplied
 organizationName                   = supplied
@@ -76,6 +86,7 @@ commonName                         = supplied
 emailAddress                       = optional
 
 ####################################################################
+
 [ signing_req ]
 subjectKeyIdentifier               = hash
 authorityKeyIdentifier             = keyid,issuer
@@ -83,6 +94,7 @@ basicConstraints                   = CA:FALSE
 keyUsage                           = digitalSignature, keyEncipherment
 
 ####################################################################
+
 [ server_cert ]
 basicConstraints                   = CA:FALSE
 nsCertType                         = server
@@ -93,6 +105,7 @@ keyUsage                           = critical, digitalSignature, keyEncipherment
 extendedKeyUsage                   = serverAuth
 
 ####################################################################
+
 [ client_cert ]
 basicConstraints                   = CA:FALSE
 nsCertType                         = client, email
@@ -101,3 +114,14 @@ subjectKeyIdentifier               = hash
 authorityKeyIdentifier             = keyid,issuer:always
 keyUsage                           = critical, nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage                   = clientAuth, emailProtection
+
+####################################################################
+
+[ combined_cert ]
+basicConstraints                   = CA:FALSE
+nsCertType                         = client, server, email
+nsComment                          = "OpenSSL Generated Client+Server Certificate"
+subjectKeyIdentifier               = hash
+authorityKeyIdentifier             = keyid,issuer:always
+keyUsage                           = critical, digitalSignature, keyEncipherment, nonRepudiation
+extendedKeyUsage                   = serverAuth, clientAuth, emailProtection

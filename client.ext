@@ -1,5 +1,0 @@
-subjectAltName = @alt_names
-
-[alt_names]
-email.1 = optional
-DNS.1   = optional
