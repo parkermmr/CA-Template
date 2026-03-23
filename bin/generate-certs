@@ -6,8 +6,8 @@ set -e
 VERSION="1.0.0"
 
 # Paths
-CA_DIR=~/CA
-DEFAULT_OUTPUT_DIR=~/.secrets
+CA_DIR=${CA_DIR:-~/CA}
+DEFAULT_OUTPUT_DIR=${CERT_OUTPUT_DIR:-~/.secrets}
 CONFIG_FILE="${CA_DIR}/.generate-certs.conf"
 
 # Default certificate subject values (can be overridden in config file)
@@ -1056,7 +1056,7 @@ generate_keystore() {
     local crt_file=$4
     
     local keystore_file="$dir/${name}-keystore.p12"
-    local password="${KEYSTORE_PASSWORD:-$(openssl rand -base64 32)}"
+    local password="${KEYSTORE_PASSWORD:-$(openssl rand -hex 32)}"
     
     print_info "Creating PKCS12 keystore..."
     
